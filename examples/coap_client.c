@@ -20,7 +20,7 @@
 #define COAP_DEFAULT_TIME_USEC 0
 
 static uint8_t coap_request_mode = 0;
-char coap_uri[64] = {0};
+static char coap_uri[64] = {0};
 static coap_uri_t uri;
 
 static void message_handler(struct coap_context_t *ctx, const coap_endpoint_t *local_interface, const coap_address_t *remote,
@@ -84,7 +84,7 @@ static void message_handler(struct coap_context_t *ctx, const coap_endpoint_t *l
     }
 }
 
-void coap_client_task(void *arg)
+static void coap_client_task(void *arg)
 {
     struct hostent *hp;
     struct ip4_addr *ip4_addr;
@@ -262,7 +262,7 @@ static uint8_t cmdline_method(char *arg)
     return i; /* note that we do not prevent illegal methods */
 }
 
-int cmdline_option_parser(int argc, char **argv)
+static int cmdline_option_parser(int argc, char **argv)
 {
     int8_t ret = -1;
 
