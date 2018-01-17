@@ -1,0 +1,16 @@
+
+import os
+from building import *
+
+cwd = GetCurrentDir()
+
+src = Split('''
+coap_client.c
+coap_server.c
+''')
+
+CPPPATH = [cwd ]
+
+group = DefineGroup('coap-examples', src, depend = ['PKG_USING_COAP_EXAMPLE', 'PKG_USING_COAP', 'RT_USING_LWIP', 'RT_USING_LWIP_IPV6', 'RT_USING_LIBC', 'RT_USING_POSIX', 'RT_USING_DFS', 'RT_USING_DFS_NET'], CPPPATH = CPPPATH)
+
+Return('group')
