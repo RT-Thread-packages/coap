@@ -38,6 +38,12 @@ if rtconfig.CROSS_TOOL == 'keil':
     LOCAL_CCFLAGS += ' --gnu'
 
 group = DefineGroup('coap', src, depend = ['PKG_USING_COAP', 'RT_USING_LWIP', 'RT_USING_LWIP_IPV6', 'RT_USING_LIBC', 'RT_USING_POSIX', 'RT_USING_DFS', 'RT_USING_DFS_NET'], CPPPATH = CPPPATH, LOCAL_CCFLAGS = LOCAL_CCFLAGS, CPPDEFINES = CPPDEFINES)
-group += SConscript('examples/SConscript')
+
+examples_src = Split('''
+examples/coap_client.c
+examples/coap_server.c
+''')
+
+group = group + DefineGroup('coap-examples', examples_src, depend = ['PKG_USING_COAP_EXAMPLE', 'PKG_USING_COAP'], CPPPATH = CPPPATH)
 
 Return('group')
